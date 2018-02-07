@@ -1,15 +1,18 @@
 <?php
+require 'include/dbconnection.php'
     
 ?>
 <html>
 
 <head>
-	<title>Book Information</title>
+    
+	<title>Book Informationn</title>
     <link href="assets/css/reg.css" rel="stylesheet">
+
 </head>
 
 <body>
-	<form action="" method="post">
+	<form action="cit.php" method="post">
 	<h1>Library Database</h1>
 	<fieldset>
 		<legend>Book Information</legend>
@@ -31,9 +34,25 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
+               <?php
+                              $table  = mysqli_query($dbconn , "SELECT * FROM cit");
+                              while($row  = mysqli_fetch_array($table)){ ?>
+                                  <tr id="<?php echo $row['id']; ?>">
+                                    <td data-target="title"><?php echo $row['title']; ?></td>
+                                    <td data-target="pages"><?php echo $row['pages']; ?></td>
+                                    <td data-target="author"><?php echo $row['author']; ?></td>
+                                      <td data-target="year"><?php echo $row['year']; ?></td>
+                                    <td>
                 
-                ?>
+                                 <input type="submit" value="Update" />
+                                        
+                                     
+                                      </td>
+                                  </tr>
+                             <?php }
+                                
+
+                           ?>
             </tbody>
         </table>
 	</form>
@@ -45,5 +64,6 @@
 	</script>
 <?php 
     $dbconn->close();
+?>
 </body>
 </html>
